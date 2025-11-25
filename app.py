@@ -20,5 +20,9 @@ def add_route():
     b = float(request.args.get("b"))
     return jsonify({"result": add(a, b)})
 
+@app.route("/hello")
+def hello_route():
+    return jsonify({"message": "Hello from CI/CD + Jenkins + Docker + Render!"})
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
