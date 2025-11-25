@@ -24,5 +24,11 @@ def add_route():
 def hello_route():
     return jsonify({"message": "Hello from CI/CD + Jenkins + Docker + Render!"})
 
+@app.route("/subtract")
+def subtract_route():
+    a = float(request.args.get("a"))
+    b = float(request.args.get("b"))
+    return jsonify({"result": subtract(a, b)})
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
