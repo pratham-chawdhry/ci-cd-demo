@@ -12,7 +12,7 @@ pipeline {
                 checkout([$class: 'GitSCM',
                   branches: [[name: '*/main']],
                   userRemoteConfigs: [[
-                    url: 'https://github.com/prathamchawdhry/ci-cd-demo',
+                    url: 'https://github.com/pratham-chawdhry/ci-cd-demo.git',
                     credentialsId: 'github-creds'
                   ]]
                 ])
