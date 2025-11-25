@@ -1,17 +1,24 @@
-def add(a, b):
-    return a + b
+from flask import Flask, jsonify, request
 
-def subtract(a, b):
-    return a - b
+app = Flask(__name__)
 
-def multiply(a, b):
-    return a * b
-
+def add(a, b): return a + b
+def subtract(a, b): return a - b
+def multiply(a, b): return a * b
 def divide(a, b):
     if b == 0:
         raise ValueError("Cannot divide by zero.")
     return a / b
 
+@app.route("/")
+def home():
+    return jsonify({"message": "Calculator API is running!"})
+
+@app.route("/add")
+def add_route():
+    a = float(request.args.get("a"))
+    b = float(request.args.get("b"))
+    return jsonify({"result": add(a, b)})
+
 if __name__ == "__main__":
-    print("Calculator API running...")
-    print(add(2, 3))
+    app.run(host="0.0.0.0", port=10000)
