@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         IMAGE = "prathamchawdhry/ci-cd-demo:jenkins"
+        VENV = ".venv"
     }
 
     stages {
@@ -19,15 +20,22 @@ pipeline {
             }
         }
 
+        stage('Create Virtual Environment') {
+            steps {
+                sh 'python3 -m venv $VENV'
+                sh '$VENV/bin/pip install --upgrade pip'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh '$VENV/bin/pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest -v'
+                sh '$VENV/bin/pytest -v'
             }
         }
 
